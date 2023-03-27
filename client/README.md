@@ -1,4 +1,4 @@
-# IMAGINE
+# IMAGINE (Client Side)
 AI image generation web app.
 
 ## Getting started
