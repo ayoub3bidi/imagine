@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Loader, FormField } from '../components';
+import { Loader, FormField, Card } from '../components';
+
+const Cards = ({ data, title }) => {
+  if (data?.length > 0) {
+    return (
+      data.map((post) => <Card key={post._id} {...post} />)
+    );
+  }
+
+  return (
+    <h2 className="mt-5 font-bold text-white text-xl uppercase">{title}</h2>
+  );
+};
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -45,8 +57,19 @@ const Home = () => {
                 Showing results for <span className='text-[#B6EADA]'>{searchText}</span>
               </h2>
             )}
-            <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
-              cards here
+            <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+              {searchText ? (
+                <Cards
+                  data={searchedResults}
+                  title="No Search Results Found"
+                />
+                ) : (
+                  <Cards
+                    data={allPosts}
+                    title="No Posts Yet"
+                  />
+                )
+              }
             </div>
           </>
         )}
